@@ -43,3 +43,18 @@ with open('insert_queries1.sql', 'w') as file:
 
         insert_query = f"INSERT INTO MY_MEMBER_INFO (MEMNO, NICKNAME, SHPWD, BCPWD, EMAIL, MAILCHECK, BIRTH, GENDER, PHONE, JOINDATE, MEMTYPE, PROFILEIMG) VALUES ({memno}, '{nickname}', 'c1V5p7bjUgxsam+O7Sd1Mag5AOTE+B/QGQ2sBHwsxcab4iqF4rxC2Pj1kEEQM/mi32JUq+g6skNYIO7KQA5cOg==', 'qx13bnXk+QS5lRPoLH8+Mg==', '{email}', 1, '{birth}', 'notCheck', '{phone}', TO_TIMESTAMP('{join_date}','RR/MM/DD HH24:MI:SSXFF'), 'PERSON', '1711437904806_car1.png');\n"
         file.write(insert_query)
+        
+        
+import random
+
+def generate_random_seller_number():
+    return ''.join(random.choices('0123456789', k=10))
+
+with open('insert_interior_data.sql', 'w') as file:
+    for i in range(1, 101):
+        sellerno = random.randint(10000, 99999)
+        memno = random.randint(5001, 5100)
+        sellernum = generate_random_seller_number()
+
+        insert_query2 = f"INSERT INTO MY_SELLER (SELLERNO, MEMNO, SELLERNUM) VALUES ({sellerno}, {memno}, '{sellernum}');\n"
+        file.write(insert_query2)

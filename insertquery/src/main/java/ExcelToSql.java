@@ -13,7 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelToSql {
 
     public static void main(String[] args) {
-        String excelFilePath = "C:\\Users\\goott4\\Desktop\\interiorinfo.xlsx"; // 파일 경로
+        String excelFilePath = "C:\\Users\\goott4\\Desktop\\biz_case.xlsx"; // 파일 경로
         List<String> sqlStatements = readExcelData(excelFilePath);
         sqlStatements.forEach(System.out::println);
     }
@@ -30,18 +30,14 @@ public class ExcelToSql {
                 }
 
                 // 셀 데이터 읽기, 타입에 따라 적절한 값을 가져오기
-                String bhNotice = getCellValueAsString(row.getCell(0));
-                String bhIntro = getCellValueAsString(row.getCell(1));
-                String bhName = getCellValueAsString(row.getCell(2));
-                String bhPro = getCellValueAsString(row.getCell(3));
-                String bhAddr1 = getCellValueAsString(row.getCell(4));
-                String bhAddr2 = getCellValueAsString(row.getCell(5));
-                String bhInteno = getCellValueAsString(row.getCell(6)); // 이 변수는 사용되지 않는 듯 보입니다. SQL 구문에 포함이 필요한지 확인하세요.
-                String bhImg = getCellValueAsString(row.getCell(7)); // 이 변수는 사용되지 않는 듯 보입니다. SQL 구문에 포함이 필요한지 확인하세요.
+                String bcwriter = getCellValueAsString(row.getCell(0));
+                String inteno = getCellValueAsString(row.getCell(1));
+                String bctitle = getCellValueAsString(row.getCell(2));
+                String bcContent = getCellValueAsString(row.getCell(3));
 
                 // SQL 문장 생성
-                String sql = String.format("INSERT INTO biz_home VALUES (biz_home_seq.nextval, '%s', '%s', '%s', '%s', 0, 0, '%s', '%s', '%s', '%s');",
-                		bhImg, bhNotice, bhIntro, bhName, bhPro, bhAddr1, bhAddr2, bhInteno);
+                String sql = String.format("insert into biz_cases(BC_NO,BC_TITLE,BC_CONTENT,BC_WRITER,BC_DATE,BC_HIT,INTENO) values(biz_cases_seq.nextval, '%s;', '%s;', '%s;', systimestamp, 0, '%s;');",
+                		bctitle,bcContent,bcwriter,inteno);
                 sqlList.add(sql);
             }
         } catch (IOException e) {

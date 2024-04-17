@@ -13,7 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelToSql {
 
     public static void main(String[] args) {
-        String excelFilePath = "C:\\Users\\bokun\\OneDrive\\바탕 화면\\interiorinfo.xlsx"; // 파일 경로
+        String excelFilePath = "C:\\Users\\goott4\\Desktop\\interiorinfo.xlsx"; // 파일 경로
         List<String> sqlStatements = readExcelData(excelFilePath);
         sqlStatements.forEach(System.out::println);
     }
@@ -37,10 +37,11 @@ public class ExcelToSql {
                 String bhAddr1 = getCellValueAsString(row.getCell(4));
                 String bhAddr2 = getCellValueAsString(row.getCell(5));
                 String bhInteno = getCellValueAsString(row.getCell(6)); // 이 변수는 사용되지 않는 듯 보입니다. SQL 구문에 포함이 필요한지 확인하세요.
+                String bhImg = getCellValueAsString(row.getCell(7)); // 이 변수는 사용되지 않는 듯 보입니다. SQL 구문에 포함이 필요한지 확인하세요.
 
                 // SQL 문장 생성
-                String sql = String.format("INSERT INTO biz_home VALUES (biz_home_seq.nextval, '11', '%s', '%s', '%s', 0, 0, '%s', '%s', '%s', '%s');",
-                        bhNotice, bhIntro, bhName, bhPro, bhAddr1, bhAddr2, bhInteno);
+                String sql = String.format("INSERT INTO biz_home VALUES (biz_home_seq.nextval, '%s', '%s', '%s', '%s', 0, 0, '%s', '%s', '%s', '%s');",
+                		bhImg, bhNotice, bhIntro, bhName, bhPro, bhAddr1, bhAddr2, bhInteno);
                 sqlList.add(sql);
             }
         } catch (IOException e) {

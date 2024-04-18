@@ -15,8 +15,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelToSql {
 
     public static void main(String[] args) {
-        String excelFilePath = "C:\\Users\\goott4\\Desktop\\biz_case_img.xlsx"; // 파일 경로
-        String outputFilePath = "C:\\Users\\goott4\\Desktop\\sql_queries_img.txt"; // 출력 파일 경로
+        String excelFilePath = "D:\\biz_case_fe.xlsx"; // 파일 경로
+        String outputFilePath = "D:\\biz_case.txt"; // 출력 파일 경로
         List<String> sqlStatements = readExcelData(excelFilePath);
         sqlStatements.forEach(System.out::println);
         writeSqlToFile(sqlStatements, outputFilePath);
@@ -41,8 +41,8 @@ public class ExcelToSql {
                 String d = getCellValueAsString(row.getCell(3));
 
                 // SQL 문장 생성
-                String sql = String.format("insert into biz_cases_img values(biz_cases_img_seq.nextval,'%s','%s','%s','%s');",
-                		b,c,d,a);
+                String sql = String.format("insert into biz_cases values(biz_cases_seq.nextval,'%s','%s','%s', systimestamp, 0,'%s');",
+                		c,d,b,a);
                 sqlList.add(sql);
             }
         } catch (IOException e) {

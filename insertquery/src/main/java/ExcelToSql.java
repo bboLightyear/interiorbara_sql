@@ -1,4 +1,6 @@
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +15,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelToSql {
 
     public static void main(String[] args) {
-        String excelFilePath = "C:\\Users\\goott4\\Desktop\\biz_case.xlsx"; // 파일 경로
+        String excelFilePath = "C:\\Users\\goott4\\Desktop\\biz_case_img.xlsx"; // 파일 경로
+        String outputFilePath = "C:\\Users\\goott4\\Desktop\\sql_queries_img.txt"; // 출력 파일 경로
         List<String> sqlStatements = readExcelData(excelFilePath);
         sqlStatements.forEach(System.out::println);
+        writeSqlToFile(sqlStatements, outputFilePath);
     }
 
     private static List<String> readExcelData(String filePath) {
@@ -30,14 +34,15 @@ public class ExcelToSql {
                 }
 
                 // 셀 데이터 읽기, 타입에 따라 적절한 값을 가져오기
-                String bcwriter = getCellValueAsString(row.getCell(0));
-                String inteno = getCellValueAsString(row.getCell(1));
-                String bctitle = getCellValueAsString(row.getCell(2));
-                String bcContent = getCellValueAsString(row.getCell(3));
+                
+                String a = getCellValueAsString(row.getCell(0));
+                String b = getCellValueAsString(row.getCell(1));
+                String c = getCellValueAsString(row.getCell(2));
+                String d = getCellValueAsString(row.getCell(3));
 
                 // SQL 문장 생성
-                String sql = String.format("insert into biz_cases(BC_NO,BC_TITLE,BC_CONTENT,BC_WRITER,BC_DATE,BC_HIT,INTENO) values(biz_cases_seq.nextval, '%s;', '%s;', '%s;', systimestamp, 0, '%s;');",
-                		bctitle,bcContent,bcwriter,inteno);
+                String sql = String.format("insert into biz_cases_img values(biz_cases_img_seq.nextval,'%s','%s','%s','%s');",
+                		b,c,d,a);
                 sqlList.add(sql);
             }
         } catch (IOException e) {
@@ -59,5 +64,16 @@ public class ExcelToSql {
             }
         }
         return "";
+    }
+    private static void writeSqlToFile(List<String> sqlStatements, String outputFilePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilePath))) {
+            for (String sql : sqlStatements) {
+                writer.write(sql);
+                writer.newLine(); // 다음 줄로 이동
+            }
+            System.out.println("SQL 쿼리가 파일에 성공적으로 저장되었습니다.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

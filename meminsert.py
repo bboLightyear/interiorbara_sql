@@ -33,8 +33,8 @@ def generate_random_phone_number():
     return f"010{''.join(random.choices(string.digits, k=8))}"
 
 with open('insert_queries1.sql', 'w') as file:
-    for i in range(1, 301):
-        memno = 1000 + i
+    for i in range(1, 42):
+        memno = 5101 + i
         nickname = generate_random_word(10)
         email = generate_random_email()
         birth = generate_random_birth()
@@ -45,16 +45,16 @@ with open('insert_queries1.sql', 'w') as file:
         file.write(insert_query)
         
         
-import random
+# import random
 
-def generate_random_seller_number():
-    return ''.join(random.choices('0123456789', k=10))
+# def generate_random_seller_number():
+#     return ''.join(random.choices('0123456789', k=10))
 
-with open('insert_interior_data.sql', 'w') as file:
-    for i in range(1, 101):
-        sellerno = random.randint(10000, 99999)
-        memno = random.randint(5001, 5100)
-        sellernum = generate_random_seller_number()
+# with open('insert_interior_data.sql', 'w') as file:
+#     for i in range(1, 101):
+#         sellerno = random.randint(10000, 99999)
+#         memno = random.randint(5001, 5100)
+#         sellernum = generate_random_seller_number()
 
-        insert_query2 = f"INSERT INTO MY_SELLER (SELLERNO, MEMNO, SELLERNUM) VALUES ({sellerno}, {memno}, '{sellernum}');\n"
-        file.write(insert_query2)
+#         insert_query2 = f"INSERT INTO MY_SELLER (SELLERNO, MEMNO, SELLERNUM) VALUES ({sellerno}, {memno}, '{sellernum}');\n"
+#         file.write(insert_query2)

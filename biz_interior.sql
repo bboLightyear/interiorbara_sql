@@ -1830,7 +1830,7 @@ insert into biz_cases values(biz_cases_seq.nextval,'낭만적인 침실 만들�
 래미안 위례의 경우 여러분들께 공간별로 소개해 드리려 합니다~ 
 래미안 위례 거실을 한마디로 표현한다면 여유로움 속 트렌디함이라 표현할 수 있겠네요!','어울림디자인', systimestamp, 0,'78912');
 
-
+commit;
 
 insert into biz_cases_img values(biz_cases_img_seq.nextval,'1 (1).jpg','1 (1).jpg','1','77215');
 insert into biz_cases_img values(biz_cases_img_seq.nextval,'1 (2).jpg','1 (2).jpg','1','77215');
